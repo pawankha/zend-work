@@ -1,0 +1,132 @@
+<?php echo $this->doctype() ?>
+<html>
+    <head>    
+        <?php echo $this->headTitle(); ?> 
+        <?php echo $this->headMeta(); ?> 
+        <?php echo $this->headLink(); ?> 
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headScript(); ?> 
+        <?php echo $this->inlineScript(); ?>  
+    </head>
+	<style>
+		.page-wrap {
+  display: -webkit-box;           /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;              /* OLD - Firefox 19- (doesn't work very well) */
+  display: -ms-flexbox;           /* TWEENER - IE 10 */
+  display: -webkit-flex;          /* NEW - Chrome */
+  display: flex;
+  height: 100%;
+    width: 100%;                    /* NEW, Spec - Opera 12.1, Firefox 20+ */
+ }
+
+.main-content {
+  -webkit-box-ordinal-group: 2;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: 2;      /* OLD - Firefox 19- */
+  -ms-flex-order: 2;              /* TWEENER - IE 10 */
+  -webkit-order: 2;               /* NEW - Chrome */
+  order: 2;                     /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  width: 80%;                     /* No flex here, other cols take up remaining space */
+ -moz-box-flex: 1;               /* Without this, Firefox 19- expands to widest paragraph, overrides width */
+  background: white;
+}
+
+.main-nav {
+  -webkit-box-ordinal-group: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: 1;      /* OLD - Firefox 19- */
+  -ms-flex-order: 1;              /* TWEENER - IE 10 */
+  -webkit-order: 1;               /* NEW - Chrome */
+  order: 1;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  
+  -webkit-box-flex: 1;            /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;               /* OLD - Firefox 19- */
+  width: 20%;                     /* For old syntax, otherwise collapses. */
+  -webkit-flex: 1;                /* Chrome */
+  -ms-flex: 1;                    /* IE 10 */
+  flex: 1;                        /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  
+  background: #ccc;
+}
+
+.main-sidebar {
+  -webkit-box-ordinal-group: 3;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: 3;      /* OLD - Firefox 19- */
+  -ms-flex-order: 3;              /* TWEENER - IE 10 */
+  -webkit-order: 3;               /* NEW - Chrome */
+  order: 3;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  
+  -webkit-box-flex: 1;            /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;               /* Firefox 19- */
+  width: 20%;                     /* For OLD syntax, otherwise collapses. */
+  -ms-flex: 1;                    /* TWEENER - IE 10 */
+  -webkit-flex: 1;                /* NEW - Chrome */
+  flex: 1;                        /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  
+  background: #ccc;
+}
+
+.main-content,
+.main-sidebar,
+.main-nav {
+  padding: 1em;
+}
+
+body {
+  padding: 2em;
+  background: #79a693;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1, h2 {
+  font: bold 2em Sans-Serif;
+  margin: 0 0 1em 0;
+}
+h2 {
+  font-size: 1.5em;
+}
+p {
+  margin: 0 0 1em 0;
+}
+	</style>
+    <body>
+		
+		<div class="page-wrap">
+  
+  <section class="main-content">
+    <h1></h1>
+	<div class="notification">
+	<?php
+		//if(!empty($this->message)){
+            echo $this->message[0];
+           // print_r($this->resultrow);
+		//}?>
+     </div>
+   
+	<iframe id='iframe2' name="iframe_a" src="http://otp.rp.cisinlive.com/index/choosedevice" frameborder="0" style="overflow: hidden; height: 100%;
+        width: 100%; position: absolute;" height="100%" width="100%"></iframe>
+	
+  </section>
+  
+   
+    <nav class="main-nav">
+    <h2>Nav</h2>
+    <ul>
+      <li><a href="/index/choosedevice" target="iframe_a"> Step 1 </a></li>
+      <li><a href="/index/fronthand" target="iframe_a"> Step 2 </a> </li>
+      <li><a href="/index/index1" target="iframe_a">Step 3 </a> </li>
+	  <li><a href="/index/sms" target="iframe_a">Sms Gateway Credentials </a> </li>
+	  <li><a href="/index/email" target="iframe_a">Emails Gateway Credentials </a> </li>
+	    <li><a href="/index/showrecords" target="iframe_a">Show Records </a> </li>
+      
+    </ul>
+  </nav>
+ 
+    
+</div>
+		
+    </body>
+
+</html>

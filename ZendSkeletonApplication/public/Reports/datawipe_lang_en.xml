@@ -1,0 +1,176 @@
+<!DOCTYPE DW><DW>
+<DWcontext>
+	<dwmessage>
+		<dwsource>Manufacturer:</dwsource>
+		<dwtranslation>Manufacturer:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Model:</dwsource>
+		<dwtranslation>Model:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Device ID:</dwsource>
+		<dwtranslation>Device ID:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>IMEI:</dwsource>
+		<dwtranslation>IMEI:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>IMSI:</dwsource>
+		<dwtranslation>IMSI:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>ECID:</dwsource>
+		<dwtranslation>ECID:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Operating system:</dwsource>
+		<dwtranslation>Operating system:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Handset memory size:</dwsource>
+		<dwtranslation>Handset memory size:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Memory card size:</dwsource>
+		<dwtranslation>Memory card size:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Memory card serial number:</dwsource>
+		<dwtranslation>Memory card serial number:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Start date:</dwsource>
+		<dwtranslation>Start date:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Start time:</dwsource>
+		<dwtranslation>Start time:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Finish date:</dwsource>
+		<dwtranslation>Finish date:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Finish time:</dwsource>
+		<dwtranslation>Finish time:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Start date and time:</dwsource>
+		<dwtranslation>Start date and time:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Finish date and time:</dwsource>
+		<dwtranslation>Finish date and time:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Internal memory wiped:</dwsource>
+		<dwtranslation>Internal memory wiped:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>External memory wiped:</dwsource>
+		<dwtranslation>External memory wiped:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Number of wipe passes:</dwsource>
+		<dwtranslation>Number of wipe passes:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>DataWipe version:</dwsource>
+		<dwtranslation>DataWipe version:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>DeviceInfo version:</dwsource>
+		<dwtranslation>DeviceInfo version:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>DeviceWipe version:</dwsource>
+		<dwtranslation>DeviceWipe version:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Operator name:</dwsource>
+		<dwtranslation>Operator name:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>License ID:</dwsource>
+		<dwtranslation>License ID:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Wipe ID:</dwsource>
+		<dwtranslation>Wipe ID:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>WIPE REPORT</dwsource>
+		<dwtranslation>WIPE REPORT</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>DATAWIPE REPORT</dwsource>
+		<dwtranslation>DATAWIPE REPORT</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Device information</dwsource>
+		<dwtranslation>Device information</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Memory</dwsource>
+		<dwtranslation>Memory</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Wipe information</dwsource>
+	<dwtranslation>Wipe information</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Pass</dwsource>
+		<dwtranslation>Pass</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Fail</dwsource>
+		<dwtranslation>Fail</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>NotPresent</dwsource>
+		<dwtranslation>Not present</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>FactoryResetOnly</dwsource>
+		<dwtranslation>All data erased and factory reset</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>NotSupported</dwsource>
+		<dwtranslation>Not supported</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Wipe type:</dwsource>
+		<dwtranslation>Wipe type:</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Turbo</dwsource>
+		<dwtranslation>Turbo</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Secure</dwsource>
+		<dwtranslation>Secure</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Enhanced</dwsource>
+		<dwtranslation>Enhanced</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>Custom fields</dwsource>
+		<dwtranslation>Custom fields</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>AppleFactoryReset</dwsource>
+		<dwtranslation>All data erased and flashed to latest permitted version </dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>WiFiAddress:</dwsource>
+		<dwtranslation>WiFiAddress</dwtranslation>
+	</dwmessage>
+	<dwmessage>
+		<dwsource>BluetoothAddress:</dwsource>
+		<dwtranslation>BluetoothAddress</dwtranslation>
+	</dwmessage>
+</DWcontext>
+</DW>

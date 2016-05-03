@@ -1,0 +1,20 @@
+<?php echo $this->doctype() ?>
+<html>
+    <head>    
+        <?php echo $this->headTitle(); ?> 
+        <?php echo $this->headMeta(); ?> 
+        <?php echo $this->headLink(); ?> 
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headScript(); ?> 
+        <?php echo $this->inlineScript(); ?>  
+    </head>
+
+    <body>
+        <div style="width: 100%; margin: 0px;">
+            <?php echo $this->render('section/header.phtml'); ?>
+            <?php echo $this->layout()->content; ?>
+            <?php echo $this->render('section/footer.phtml'); ?>
+        </div>
+    </body>
+
+</html>

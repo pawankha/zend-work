@@ -1,0 +1,123 @@
+<style>
+  body {
+    color: #000;
+    font-family: Tahoma,Helvetica,sans-serif;
+    font-size: 12px;
+    line-height: 32px;
+}
+table {
+    border: 1px solid #dadada;
+    border-collapse: separate;
+    margin-left: 0;
+    margin-top: 9%;
+    width: 69%;
+}
+</style>
+<div class='container'>
+
+<center>
+  
+<form method="post" action="/index/sendmsg" target="iframe2">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<thead>
+        	<tr>
+            	
+          	</tr>
+        </thead>
+        <tbody>
+        	<tr>
+            	<td colspan="4">
+            		<!-- Error message here, remove class "no_display" to using  -->            		
+            <?php $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+			if ($flashMessenger->hasMessages('success')): ?>
+              		<div class="error_box">
+                		<ul>
+		   		<div class="message success" >
+					<?php foreach ($flashMessenger->getMessages('success') as $msg): ?>
+					<?php echo $msg ?>
+				  <?php endforeach; ?>
+					</div>
+				 
+
+                  	  
+                		</ul>
+              		</div>
+              		 <?php endif; ?>
+              		<!---->
+            	</td>
+          	</tr>
+          
+          	<tr>
+			  <td colspan="8" class="textcenter">
+					<?php echo $this->sendotp['txtshow']; ?>
+				
+			  </td>
+			</tr>
+			<tr style="text-align: center">
+				<td colspan="2" class="textcenter">
+					<label>Please Enter CTN:</label><br>
+					<input class="formsite width240 " maxlength="50" type="text" name="ctn"/>
+					<input type="hidden" name="type" value="<?php echo $this->sendotp['id']; ?>">
+				<input type="hidden" name="link" value="<?php echo $this->sendotp['link']; ?>">
+				</td>
+				
+			</tr>
+			<tr>
+				<td colspan="2"  class="textcenter">
+					<label>Please Enter Email:</label><br>
+					<input class="formsite width240 " maxlength="50" type="text" id="email" name="data[email]" value=""/>
+				</td>
+			
+			</tr>
+			
+			<tr>
+				<td colspan="2"  class="textcenter">
+					<label>IMEI*#06# :</label><br>
+					<input class="formsite width240 " maxlength="50" type="text" id="imei" name="data[email]" value=""/>
+				</td>
+			
+			</tr>
+			
+			<tr>
+				<td colspan="2"  class="textcenter">
+					<label>Serial Number :</label><br>
+					<input class="formsite width240 " maxlength="50" type="text" id="email" name="data[email]" value=""/>
+				</td>
+			
+			</tr>
+			
+			
+			
+			<tr>
+				<td colspan="8"  class="textcenter">
+				<?php echo $this->sendotp['txtshow']; ?>		
+				</td>
+			
+			</tr>
+			
+			
+			
+			<tr>
+				<td colspan="2"  class="textcenter">
+					<label>OTP Timeout :</label><br>
+					<select class="formsite width246" name="timeoutotp">
+					  <option id="" value="15"> 15 minites</option>
+					    <option id="" value="15"> 60 minites</option>
+						  <option id="" value="15"> 90 minites</option>
+					</select>
+				</td>
+			
+			</tr>
+			
+			<tr>
+				
+				<td colspan="2" class="textcenter">
+					<input class="button_site" type="submit" name="submit" value="Submit">										
+				</td>
+			</tr>
+			
+		<tbody>		
+	</table>
+</form>
+</center>
+</div>

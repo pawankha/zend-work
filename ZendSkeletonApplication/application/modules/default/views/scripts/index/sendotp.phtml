@@ -1,0 +1,97 @@
+<?php echo $this->doctype();?>
+<html>
+    <head>    
+        <?php echo $this->headTitle(); ?> 
+        <?php echo $this->headMeta(); ?> 
+        <?php echo $this->headLink(); ?> 
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headScript(); ?> 
+        <?php echo $this->inlineScript(); ?>
+		<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </head>
+	  <section class="main-content">
+	
+	  
+		  	<?php echo $this->sendotp['txtshow']; ?>
+			<br><br>
+		  <center>
+			
+       <div class='container'>
+		<div class="notification">
+	
+	<?php $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+	 if ($flashMessenger->hasMessages('success')): ?>
+    <div class="message success" >
+    <?php foreach ($flashMessenger->getMessages('success') as $msg): ?>
+        <?php echo $msg ?>
+    <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+    </div>
+	<br>
+    <form method="post" action="/index/sendmsg">
+		
+		 
+		 
+        <div class='form_ele'>
+            <div class='left'>
+                <label>Please Enter CTN :</label>
+            </div>
+            <div class='right'>
+                <input type="text" name="ctn"/>
+				<input type="hidden" name="type" value="<?php echo $this->sendotp['id']; ?>">
+				<input type="hidden" name="link" value="<?php echo $this->sendotp['link']; ?>">
+            </div>
+        </div>
+		
+		  
+		   
+		   
+        <div class='form_ele'>
+            <div class='left'>
+                <label>Please Enter Email :</label>
+            </div>
+            <div class='right'>
+                <input type="email" name="email"/>
+            </div>
+        </div>
+		<?php if($this->sendotp['id']=="iphone"){ ?>
+        <div class='form_ele'>
+            <div class='left'>
+                <label>IMEI *#06# :</label>
+            </div>
+            <div class='right'>
+                <input type="text" maxlength="15" name="imei"/>
+            </div>
+        </div>
+		<?php } ?>
+		
+				<div class="notification">
+				
+				<?php $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+				if ($flashMessenger->hasMessages('error')): ?>
+				<div class="message success" >
+				<?php foreach ($flashMessenger->getMessages('error') as $msg): ?>
+				<?php echo $msg ?>
+				<?php endforeach; ?>
+				</div>
+				<?php endif; ?>
+				
+				</div>
+<br><br>
+		<!-- <div class="g-recaptcha" data-sitekey="6LfNFx0TAAAAAOA6eABL3BmoNFMuXjgg3nk5DAB8"></div>-->
+        
+        <div class='form_ele'>
+            <div class='left'>
+                &nbsp;
+            </div>
+            <div class='right'>
+                <input type="submit" name="submit" value="Send" class='btn'/>
+               
+            </div>
+        </div>
+    </form>
+	   </div>
+	</center>
+  </section>

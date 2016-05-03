@@ -1,0 +1,62 @@
+
+	<div class="notification">
+	<?php
+		//if(!empty($this->message)){
+            echo $this->message[0];
+           // print_r($this->resultrow);
+		//}?>
+     </div>
+   <form action="/index/chooseupdate" method="post" enctype="multipart/form-data">
+          <h3>Step 1 </h3>
+            <div class="field-wrap">
+            <label>
+             Above Text &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="req">*</span>
+            </label>
+            <textarea name="info[above_text]" style="width:350px; height:80px;" cols="42" rows="5"><?php echo $this->resultrow[0]->above_text;?></textarea>
+
+          </div>
+			
+			
+			 <div class="field-wrap">
+            <label>
+              Apple Logo<span class="req">*</span>
+            </label>
+            <?php
+            if(!empty($this->resultrow[0]->image_1)){?>
+            <img src="<?php echo SITE_URL."/upload/".$this->resultrow[0]->image_1 ?>" width="100px;" height="100px;">
+            <?php } ?>
+            <input type="file" name="image_1" />
+       </div>
+			 <div class="field-wrap">
+            <label>
+              Android Logo<span class="req">*</span>
+            </label>
+             <?php
+            if(!empty($this->resultrow[0]->image_2)){?>
+            <img src="<?php echo SITE_URL."/upload/".$this->resultrow[0]->image_2 ?>" width="100px;" height="100px;">
+            <?php } ?>
+            <input type="file" name="image_2"/>
+          </div>
+			 <div class="field-wrap">
+            <label>
+             Below Logo Text &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="req">*</span>
+            </label>
+            <textarea name="info[below_text]" style="width:350px; height:80px;" cols="42" rows="5"><?php echo $this->resultrow[0]->below_text; ?></textarea>
+         </div>
+			 <div class="field-wrap">
+            <label>
+             Manage Text For Otp Page<span class="req">*</span>
+            </label>
+            <textarea name="info[text_otp_page]" style="width:350px; height:80px;" cols="42" rows="5"><?php echo $this->resultrow[0]->text_otp_page; ?></textarea>
+            
+          </div>
+			 <br>
+			  <div class="field-wrap">
+            <label>
+             Manage Token Expire Time<span class="req">*</span>
+            </label>            
+           <input type="text" name="info[otp_expire_time]" value="<?php echo $this->resultrow[0]->otp_expire_time; ?>"/> (choose time in minites only (ex:- 60 or 90 or 15))
+          </div>
+			   <button class="button button-block"/>Submit</button>
+          
+          </form>

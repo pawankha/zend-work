@@ -1,0 +1,33 @@
+<?php echo $this->doctype();
+//print_r($this->resultrow['userinfo']);
+?>
+<style>
+.welcome {
+    color: #a6ccda;
+    margin-left: 5px;
+    padding-top: 16px;
+}
+</style>
+<html>
+		<?php if (!empty($this->resultrow['userinfo'])) {?>
+	    		<div class="welcome">
+	      			<h1>Welcome to OTA<?php echo $this->resultrow['userinfo'][0]->user_name;?></h1>
+				[ <a href="/index/logout">Logout</a> ]
+	      		</div>
+			<?php }?>
+
+  <section class="main-content" style="margin-top: 50px;">
+	   <h1></h1>
+	    <center>
+			<h4><?php echo $this->resultrow['resultrow1'][0]->above_text; ?></h4>
+ 
+        <a href="/index/sendotpmobile/id/iphone" target="iframe_a"> <img src="<?php echo SITE_URL."/upload/".$this->resultrow['resultrow1'][0]->image_1?>" width="200px;" height="200px"></a>
+		 <a href="/index/sendotpmobile/id/android" target="iframe_a"><img src="<?php echo SITE_URL."/upload/".$this->resultrow['resultrow1'][0]->image_2?>" width="200px;" height="200px"></a>
+		 
+		 	<h4><?php echo $this->resultrow['resultrow1'][0]->below_text; ?></h4>
+			
+			<input type="text" name="info[otp_expire_time]" value=""/><br><br>
+			<button class="button_site"/>Submit</button>
+		  </center>
+	
+  </section>

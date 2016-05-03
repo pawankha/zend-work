@@ -1,0 +1,48 @@
+
+<form action="/index/logincheck/" method="post">
+	 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<thead>
+	    	<tr>
+	        	<th colspan="4">Login</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	       	<tr>
+				
+					 
+	           	<td colspan="4"><!-- Error message here, remove class "no_display" to using  -->
+	           		<?php
+					$flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('FlashMessenger');
+					if ($flashMessenger->hasMessages('success')): ?>
+	           		<div class="error_box">
+	               		<ul>
+	               			<li><?php foreach ($flashMessenger->getMessages('success') as $msg): ?>
+					<?php echo $msg ?>
+				  <?php endforeach; ?></li>               			
+	              		</ul>
+	           		</div>
+	           		<?php endif; ?>
+	           		<!---->            
+	           	</td>
+	       	</tr>
+	       	<tr>
+	          	<td colspan="2" class="textright">Username</td>
+	           	<td width="60%" colspan="2"><input name="user_name" class="<?php echo ($this->errorMessage != "" ? "form_error" : "")?> formsite width240" type="text" id="user_name" maxlength="50" /></td>
+	       	</tr>
+	       	<tr>
+	           	<td colspan="2" class="textright">Password</td>
+	           	<td colspan="2"><input name="password" type="password" class="<?php echo ($this->errorMessage != "" ? "form_error" : "")?> formsite width240" id="password" value="" maxlength="50" /></td>
+	       	</tr>
+	       	<tr>
+	          	<td colspan="2" class="textright">&nbsp;</td>
+	           	<td colspan="2"><input class="button_site" type="submit" name="button" id="button" value="Login" />
+	           	<input class="button_site" type="reset" name="reset" id="reset" value="Reset" /></td>
+	       	</tr>
+		</tbody>
+	</table>
+</form>
+<script>
+$(document).ready(function(){
+	  $("#user_name").focus();
+	});
+</script>

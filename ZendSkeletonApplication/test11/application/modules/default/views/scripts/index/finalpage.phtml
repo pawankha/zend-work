@@ -1,0 +1,70 @@
+<?php echo $this->doctype() ?>
+<html>
+    <head>    
+        <?php echo $this->headTitle(); ?> 
+        <?php echo $this->headMeta(); ?> 
+        <?php echo $this->headLink(); ?> 
+        <?php echo $this->headStyle(); ?>
+        <?php echo $this->headScript(); ?> 
+        <?php echo $this->inlineScript(); ?>  
+    </head>
+
+    <body>
+        <div style="width: 100%; margin: 0px;">
+          
+             <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+               
+               
+            </div>
+        </nav>
+        
+        <div class="form">
+     
+        
+        <div id="login">   
+         <br><br><br>
+          
+          <center><div class="notification">
+	<?php
+		if(!empty($this->data)){
+			
+           // print_r($this->data);
+           // print_r($this->resultrow);
+		   ?>
+		   <h3> <?php echo $this->data['step_1_above_text'] ?> </h3>
+		   
+		   <img src="<?php echo SITE_URL."/upload/".$this->data['step_3_image1']?>">
+		   <img src="<?php echo SITE_URL."/upload/".$this->data['step_3_image2']?>">
+		   <img src="<?php echo SITE_URL."/upload/".$this->data['step_3_image3']?>">
+		   
+		   <h3> <?php echo $this->data['step_1_below_text'] ?> </h3>
+		   
+		   <img src="<?php echo SITE_URL."/upload/".$this->data['step_3_1_image1']?>">
+		   <img src="<?php echo SITE_URL."/upload/".$this->data['step_3_1_image2']?>">
+		   
+		
+    
+   
+
+    </div>
+	
+	<?php }?>
+          </center>
+          
+        
+		  
+        </div>
+        
+		<br><br><br><br><br><br><br><br>
+      </div><!-- tab-content -->
+      
+   
+            
+            <?php // echo $this->layout()->content; ?>
+            
+        </div>
+    </body>
+
+</html>
