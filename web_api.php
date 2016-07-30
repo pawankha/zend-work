@@ -1,15 +1,11 @@
 <?php
-
 class ControllerFeedWebApi extends Controller {
-
 	# Use print_r($json) instead json_encode($json)
 	private $debug = false;
-
 	public function categories() {
 		$this->init();
 		$this->load->model('catalog/category');
 		$json = array('success' => true);
-
 		# -- $_GET params ------------------------------
 		
 		if (isset($this->request->get['parent'])) {
@@ -17,18 +13,13 @@ class ControllerFeedWebApi extends Controller {
 		} else {
 			$parent = 0;
 		}
-
 		if (isset($this->request->get['level'])) {
 			$level = $this->request->get['level'];
 		} else {
 			$level = 1;
 		}
-
 		# -- End $_GET params --------------------------
-
-
 		$json['categories'] = $this->getCategoriesTree($parent, $level);
-
 		if ($this->debug) {
 			echo '<pre>';
 			print_r($json);
@@ -36,14 +27,11 @@ class ControllerFeedWebApi extends Controller {
 			$this->response->setOutput(json_encode($json));
 		}
 	}
-
 	public function category() {
 		$this->init();
 		$this->load->model('catalog/category');
 		$this->load->model('tool/image');
-
 		$json = array('success' => true);
-
 		# -- $_GET params ------------------------------
 		
 		if (isset($this->request->get['id'])) {
@@ -51,9 +39,7 @@ class ControllerFeedWebApi extends Controller {
 		} else {
 			$category_id = 0;
 		}
-
 		# -- End $_GET params --------------------------
-
 		$category = $this->model_catalog_category->getCategory($category_id);
 		
 		$json['category'] = array(
@@ -62,7 +48,6 @@ class ControllerFeedWebApi extends Controller {
 			'description'           => $category['description'],
 			'href'                  => $this->url->link('product/category', 'category_id=' . $category['category_id'])
 		);
-
 		if ($this->debug) {
 			echo '<pre>';
 			print_r($json);
@@ -70,15 +55,11 @@ class ControllerFeedWebApi extends Controller {
 			$this->response->setOutput(json_encode($json));
 		}
 	}
-
-
 	public function products() {
 		$this->init();
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
 		
-
-
 		# -- $_GET params ------------------------------
 		
 		if (isset($this->request->get['category'])) {
@@ -86,32 +67,26 @@ class ControllerFeedWebApi extends Controller {
 		} else {
 			$category_id = 0;
 		}
-
 		# -- End $_GET params --------------------------
-
 		$products = $this->model_catalog_product->getProducts(array(
 			'filter_category_id'	=> $category_id
 		));
-
 		foreach ($products as $product){
-
 			if ($product['image']) {
 				$image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
 			} else {
 				$image = false;
 			}
-
 			if ((float)$product['special']) {
 				$special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$special = false;
 			}
-
 			$json['products'][] = array(
 				'id'                    => $product['product_id'],
 				'name'                  => $product['name'],
 				'description'           => $product['description'],
-				'pirce'                 => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+				'pirce'                 => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
 				'href'                  => $this->url->link('product/product', 'product_id=' . $product['product_id']),
 				'thumb'                 => $image,
 				'special'               => $special,
@@ -127,7 +102,6 @@ $json['status']="true";
 			$this->response->setOutput(json_encode($json));
 		}
 	}
-
 	public function product(){
 		$this->init();
 		$this->load->model('catalog/product');
@@ -139,47 +113,37 @@ $json['status']="true";
 		} else {
 			$product_id = 0;
 		}
-
 		# -- End $_GET params --------------------------
-
 		$product = $this->model_catalog_product->getProduct($product_id);
-
 		# product image
 		if ($product['image']) {
 			$image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_popup_width'), $this->config->get('config_image_popup_height'));
 		} else {
 			$image = '';
 		}
-
 		#additional images
 		$additional_images = $this->model_catalog_product->getProductImages($product['product_id']);
 		$images = array();
-
 		foreach ($additional_images as $additional_image) {
 			$images[] = $this->model_tool_image->resize($additional_image, $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
 		}
-
 		#specal
 		if ((float)$product['special']) {
 			$special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')));
 		} else {
 			$special = false;
 		}
-
 		#discounts
 		$discounts = array();
 		$data_discounts =  $this->model_catalog_product->getProductDiscounts($product['product_id']);
-
 		foreach ($data_discounts as $discount) {
 			$discounts[] = array(
 				'quantity' => $discount['quantity'],
 				'price'    => $this->currency->format($this->tax->calculate($discount['price'], $product['tax_class_id'], $this->config->get('config_tax')))
 			);
 		}
-
 		#options
 		$options = array();
-
 		foreach ($this->model_catalog_product->getProductOptions($product['product_id']) as $option) { 
 			if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') { 
 				$option_value_data = array();
@@ -187,7 +151,7 @@ $json['status']="true";
 				foreach ($option['option_value'] as $option_value) {
 					if (!$option_value['subtract'] || ($option_value['quantity'] > 0)) {
 						if ((($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) && (float)$option_value['price']) {
-							$price = $this->currency->format($this->tax->calculate($option_value['price'], $product['tax_class_id'], $this->config->get('config_tax')));
+							$price = $this->tax->calculate($option_value['price'], $product['tax_class_id'], $this->config->get('config_tax'));
 						} else {
 							$price = false;
 						}
@@ -222,14 +186,12 @@ $json['status']="true";
 				);						
 			}
 		}
-
 		#minimum
 		if ($product['minimum']) {
 			$minimum = $product['minimum'];
 		} else {
 			$minimum = 1;
 		}
-
 		$json['product'] = array(
 			'id'                            => $product['product_id'],
 			'seo_h1'                        => $product['seo_h1'],
@@ -240,7 +202,7 @@ $json['status']="true";
 			'points'                        => $product['points'],
 			'image'                         => $image,
 			'images'                        => $images,
-			'price'                         => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+			'price'                         => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
 			'special'                       => $special,
 			'discounts'                     => $discounts,
 			'options'                       => $options,
@@ -250,7 +212,6 @@ $json['status']="true";
 			'attribute_groups'              => $this->model_catalog_product->getProductAttributes($product['product_id'])
 		);
 		
-
 		if ($this->debug) {
 					$json['message']="Products Description";
 					$json['status']="false";
@@ -283,7 +244,6 @@ $json['status']="true";
 				} else {
 					$image = false;
 				}
-
 				$result[] = array(
 					'category_id'   => $category['category_id'],
 					'parent_id'     => $category['parent_id'],
@@ -293,25 +253,21 @@ $json['status']="true";
 					'categories'    => $this->getCategoriesTree($category['category_id'], $level)
 				);
 			}
-
 			return $result;
 		}
 	}
-
 	/**
 	 * 
 	 */
 	private function init() {
 		$this->response->addHeader('Content-Type: application/json');
 	}
-
 	/**
 	 * Error message responser
 	 *
 	 * @param string $message  Error message
 	 */
 	private function error($code = 0, $message = '') {
-
 		# setOutput() is not called, set headers manually
 		header('Content-Type: application/json');
 		$json = array(
@@ -375,25 +331,18 @@ public function getCategoriesPutaItem() {
 		echo json_encode($json);
 		die;
 }
-
-public function productshome() {
-
+		public function productshome() {
 		$this->init();
 		$this->load->model('catalog/product');
 		$this->load->model('tool/image');
 		
-
-
 		# -- $_GET params ------------------------------
 		
-
 			$category_id1 = 91;
 			$category_id1 = 76;
 			$category_id1 = 141;
 			$jdata=array();
-
 		# -- End $_GET params --------------------------
-
 		$products1 = $this->model_catalog_product->getProducts(array(
 			'filter_category_id'	=> 91
 		));
@@ -405,18 +354,16 @@ public function productshome() {
 			} else {
 				$image = false;
 			}
-
 			if ((float)$product['special']) {
 				$special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$special = false;
 			}
-
 			$json['product_info'][] = array(
 				'id'                    => $product['product_id'],
 				'name'                  => $product['name'],
 				'description'           => $product['description'],
-				'pirce'                 => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+				'pirce'                 => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
 				'href'                  => $this->url->link('product/product', 'product_id=' . $product['product_id']),
 				'thumb'                 => $image,
 				'special'               => $special,
@@ -425,13 +372,11 @@ public function productshome() {
 			
 			}
 			$i++;
-
 		}
 		$json['sub_category_id']=91;
 		$json['sub_category_name']="Puja and Havan Samagri Kits";		
 		
 		$jdata['products_listing'][]=$json;
-
 				$products2 = $this->model_catalog_product->getProducts(array(
 			'filter_category_id'	=> 76
 		));
@@ -443,18 +388,16 @@ public function productshome() {
 			} else {
 				$image = false;
 			}
-
 			if ((float)$product['special']) {
 				$special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$special = false;
 			}
-
 			$json['product_info'][] = array(
 				'id'                    => $product['product_id'],
 				'name'                  => $product['name'],
 				'description'           => $product['description'],
-				'pirce'                 => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+				'pirce'                 => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
 				'href'                  => $this->url->link('product/product', 'product_id=' . $product['product_id']),
 				'thumb'                 => $image,
 				'special'               => $special,
@@ -463,12 +406,10 @@ public function productshome() {
 			
 			}
 			$i++;
-
 		}
 		$jdata['products_listing'][]=$json;
 				$json['sub_category_id']=76;
 		$json['sub_category_name']="Books, CD's and DVD's";		
-
 		
 		
 		$products3 = $this->model_catalog_product->getProducts(array(
@@ -482,18 +423,16 @@ public function productshome() {
 			} else {
 				$image = false;
 			}
-
 			if ((float)$product['special']) {
 				$special = $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id'], $this->config->get('config_tax')));
 			} else {
 				$special = false;
 			}
-
 			$json['product_info'][] = array(
 				'id'                    => $product['product_id'],
 				'name'                  => $product['name'],
 				'description'           => $product['description'],
-				'pirce'                 => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'))),
+				'pirce'                 => $this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')),
 				'href'                  => $this->url->link('product/product', 'product_id=' . $product['product_id']),
 				'thumb'                 => $image,
 				'special'               => $special,
@@ -502,13 +441,10 @@ public function productshome() {
 			
 			}
 			$i++;
-
 		}
 		$json['sub_category_id']=131;
 		$json['sub_category_name']="Puja Items";		
-
 				
-
 			$jdata['products_listing'][]=$json;
 			$jdata['message']="Products list are available";
 			$jdata['status']="true";
@@ -520,9 +456,6 @@ public function productshome() {
 		}
 		}
 	
-
-
-
 /******************************** Getting The Slider Images*******************************************************/
 public function getSlidersByGroupId( ){
 		$groupID=26;
@@ -530,7 +463,6 @@ public function getSlidersByGroupId( ){
 		
 		$query = ' SELECT * FROM '. DB_PREFIX . "pavosliderlayers   ";
 		$query .= ' WHERE group_id='.(int)$groupID .' AND `language_id`='.(int)$languageID.' AND `status` = 1 ORDER BY position ASC';
-
 		$query = $this->db->query( $query );
 		for($i=0;$i<=count($query);$i++){
 		$query->rows[$i]['image']=$this->config->get('config_ssl') . 'image/' . $query->rows[$i]['image'];
@@ -540,7 +472,6 @@ public function getSlidersByGroupId( ){
 		$this->response->setOutput(json_encode($json));
 		//print_r($query->rows);die;
 		//return $query->rows;
-
 	}
 	
 	/******************************** Getting The Slider Images *******************************************************/
@@ -610,11 +541,9 @@ public function login($override = false) {
 	
 		public function allCatDrop() {
 				$this->load->model('catalog/category');
-
 				$this->load->model('catalog/product');
 				
 				$categoriesArr = array();
-
 				$categories = $this->model_catalog_category->getCategories(0); 
 			if($categories){
 				foreach ($categories as $categry) { 
@@ -637,11 +566,9 @@ public function login($override = false) {
 		
 			public function allCatt() {
 				$this->load->model('catalog/category');
-
 				$this->load->model('catalog/product');
 				
 				$this->load->model('tool/image'); 
-
 				$response = array();
 				
 				$abc = array();
@@ -651,14 +578,11 @@ public function login($override = false) {
 				}else{
 					$catid =  0;
 				}
-
 				$categories = $this->model_catalog_category->getCategories($catid);
 			if($categories){
 				foreach ($categories as $category) {
 					$children_data = array();
-
 					$children = $this->model_catalog_category->getCategories($category['category_id']);
-
 					foreach ($children as $child) {
 						if ($child['image']) {
 							$image = $this->model_tool_image->resize($child['image'], $this->config->get('config_image_category_width'), $this->config->get('config_image_category_height'));
@@ -757,19 +681,16 @@ public function login($override = false) {
             $category_id = 0;
         }
         # -- End $_GET params --------------------------
-
         $products = $this->model_catalog_product->getProducts(array(
             'filter_category_id'        => $category_id
         ));
         
         foreach ($products as $product) {
-
             if ($product['image']) {
                 $image = $this->model_tool_image->resize($product['image'], $this->config->get('config_image_product_width'), $this->config->get('config_image_product_height'));
             } else {
                 $image = false;
             }
-
             $json['products'][] = array(
                 'id' => $product['product_id'],
                 'name' => $product['name'],
@@ -780,5 +701,4 @@ public function login($override = false) {
                 
         $this->response->setOutput(json_encode($json));
     }
-
 }
